@@ -1,0 +1,43 @@
+/* Import rating styles in case they need to be referenced */
+@import url('./ratings.css');
+
+/* Variables for consistent theming */
+:root {
+    /* Colors */
+    --primary-color: #ff7700;
+    --primary-color-dark: #c85000;
+    --secondary-color: #2c3e50;
+    --accent-color: #ffa500;
+    --text-color: #333333;
+    --text-secondary: #666666;
+    --background-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --error-color: #e74c3c;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --info-color: #3498db;
+}
+
+/* Dark theme variables */
+.dark-theme {
+    --primary-color: #ff7700;
+    --primary-color-dark: #ff9a44;
+    --secondary-color: #34495e;
+    --accent-color: #ffa500;
+    --text-color: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --background-color: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #333333;
+}
+
+/* Add any additional styles needed to integrate with the rating component */
+.movie-rating {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+/* Add any other necessary styles here */ 
