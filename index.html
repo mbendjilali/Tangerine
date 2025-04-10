@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tangerine</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./src/assets/css/ratings.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- App Header -->
+        <div class="app-header">
+            <h1><img src="icon.png" alt="Tangerine" class="header-icon"> Tangerine</h1>
+            <h2><p class="app-summary">Your personal movie tracker to manage watchlists, rate movies, and discover new films effortlessly.</p></h2>
+        </div>
+        
+        <!-- Search Section -->
+        <div class="add-movie-section" id="add-movie-section">
+            <div class="search-container">
+                <div id="search-icon" class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <input type="text" id="movie-search" placeholder="Search for movies...">
+            </div>
+            
+            <div class="advanced-search-container">
+                <div class="search-container">
+                    <input type="text" id="year-input" placeholder="Year...">
+                </div>
+                <div class="search-container">
+                    <input type="text" id="director-input" placeholder="Director...">
+                </div>
+                <div class="search-container">
+                    <select id="type-select">
+                        <option value="">Any Type</option>
+                        <option value="movie">Movie</option>
+                        <option value="series">Series</option>
+                        <option value="episode">Episode</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Search Results -->
+            <div id="search-results" class="search-results" style="display: none;"></div>
+        </div>
+        
+        <!-- Suggestions Section -->
+        <div class="suggestions-section">
+            <h2 id="fruit-market-button"><i class="fas fa-shopping-cart"></i> Fruit Market</h2>
+            <div id="suggestions-container" class="suggestions-container" style="display: none;">
+                <div id="suggestions-loading" class="suggestions-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Getting personalized suggestions...</p>
+                </div>
+                <div id="suggestions-content" class="suggestions-content">
+                    <!-- Content will be dynamically inserted -->
+                </div>
+                <button id="refresh-suggestions" class="refresh-suggestions-btn">
+                    <i class="fas fa-sync-alt"></i> Refresh Suggestions
+                </button>
+            </div>
+        </div>
+        
+        <div id="main-content">
+            <!-- Movie Lists Navigation (shown when Movies is active) -->
+            <div id="movies-nav" class="lists-nav">
+                <button id="to-watch-tab" data-list="toWatch" class="list-selector active">Movie Basket</button>
+                <button id="watched-tab" data-list="watched" class="list-selector">Watched</button>
+            </div>
+            
+            <!-- To Watch List -->
+            <div id="to-watch-list" data-list="toWatch" class="movie-list active">
+                <div class="list-header">
+                    <h2>My Basket</h2>
+                    <div class="list-controls">
+                        <select id="to-watch-sort">
+                            <option value="date-added-desc">Date Added (Newest)</option>
+                            <option value="date-added-asc">Date Added (Oldest)</option>
+                            <option value="title-asc">Title (A-Z)</option>
+                            <option value="title-desc">Title (Z-A)</option>
+                            <option value="year-desc">Year (Newest)</option>
+                            <option value="year-asc">Year (Oldest)</option>
+                        </select>
+                        <select id="to-watch-filter">
+                            <option value="all">All Genres</option>
+                            <option value="action">Action</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="animation">Animation</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="crime">Crime</option>
+                            <option value="documentary">Documentary</option>
+                            <option value="drama">Drama</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="horror">Horror</option>
+                            <option value="mystery">Mystery</option>
+                            <option value="romance">Romance</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="thriller">Thriller</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="movies-grid"></div>
+                <div id="to-watch-empty" class="empty-list">
+                    <i class="fas fa-ticket-alt"></i>
+                    <p>Your basket is empty. Search for movies to add them here.</p>
+                </div>
+            </div>
+            
+            <!-- Watched List -->
+            <div id="watched-list" data-list="watched" class="movie-list">
+                <div class="list-header">
+                    <h2>Movies I've Watched</h2>
+                    <div class="list-controls">
+                        <select id="watched-sort">
+                            <option value="rating-desc">Rating (Highest)</option>
+                            <option value="date-watched-desc">Date Watched (Newest)</option>
+                            <option value="date-watched-asc">Date Watched (Oldest)</option>
+                            <option value="title-asc">Title (A-Z)</option>
+                            <option value="title-desc">Title (Z-A)</option>
+                            <option value="year-desc">Year (Newest)</option>
+                            <option value="year-asc">Year (Oldest)</option>
+                        </select>
+                        <select id="watched-filter">
+                            <option value="all">All Genres</option>
+                            <option value="action">Action</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="animation">Animation</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="crime">Crime</option>
+                            <option value="documentary">Documentary</option>
+                            <option value="drama">Drama</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="horror">Horror</option>
+                            <option value="mystery">Mystery</option>
+                            <option value="romance">Romance</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="thriller">Thriller</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="movies-grid"></div>
+                <div id="watched-empty" class="empty-list">
+                    <i class="fas fa-award"></i>
+                    <p>You haven't marked any movies as watched yet.</p>
+                </div>
+            </div>
+            
+            <!-- Import/Export Controls -->
+            <div class="data-controls">
+                <button id="export-data" class="data-control-btn">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <label for="import-data" class="import-label">
+                    <i class="fas fa-upload"></i> Import Data
+                    <input type="file" id="import-data" style="display: none;">
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Movie Detail Modal -->
+    <div id="detail-modal" class="modal">
+        <div class="modal-content">
+            <!-- Content will be dynamically inserted -->
+        </div>
+    </div>
+    
+    <!-- Rating Modal -->
+    <div id="rating-modal" class="rating-modal">
+        <div class="rating-modal-content">
+            <div class="rating-modal-header">
+                <h2 class="rating-modal-title">Rate This Movie</h2>
+                <button class="close-rating-modal">&times;</button>
+            </div>
+            <div class="rating-movie-details">
+                <img src="" alt="Movie Poster" class="rating-movie-poster">
+                <h3 class="rating-movie-title"></h3>
+                <div class="rating-movie-meta"></div>
+            </div>
+            <div class="star-rating-container">
+                <p class="star-rating-label">How would you rate this movie?</p>
+                <div class="star-rating">
+                    <span class="star" data-value="1"> <i class="fas fa-star"></i></span>
+                    <span class="star" data-value="2"> <i class="fas fa-star"></i></span>
+                    <span class="star" data-value="3"> <i class="fas fa-star"></i></span>
+                    <span class="star" data-value="4"> <i class="fas fa-star"></i></span>
+                    <span class="star" data-value="5"> <i class="fas fa-star"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+    
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+    
+    <!-- Load the modular JavaScript app entry point -->
+    <script type="module" src="./src/app.js"></script>
+</body>
+</html> 
